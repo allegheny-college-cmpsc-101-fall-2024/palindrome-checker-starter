@@ -1,0 +1,240 @@
+setup: |
+  cd palindromechecker && poetry install
+  echo "Done installing project dependencies!"
+---
+
+# perform checks on a file
+- palindromechecker/palindromechecker/main.py:
+    - description: Ensure that the main.py file exists in the palindromechecker/palindromechecker/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for main.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Add the correct import statement for palindrome module in main.py
+      check: MatchFileFragment
+      options:
+        fragment: "from palindromechecker import palindrome"
+        count: 1
+        exact: true
+    - description: Add the correct import statement for palindromechecker module in main.py
+      check: MatchFileFragment
+      options:
+        fragment: "from palindromechecker import util"
+        count: 1
+        exact: true
+    - description: Add the correct import statement for the typer package in main.py
+      check: MatchFileFragment
+      options:
+        fragment: "import typer"
+        count: 1
+        exact: true
+    - description: Create an instance of the typer command-line interface in main.py
+      check: MatchFileFragment
+      options:
+        fragment: "cli = typer.Typer()"
+        count: 1
+        exact: true
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in main.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 3
+        exact: false
+    - description: Create a sufficient number of single-line comments in main.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 5
+        exact: false
+
+# perform checks on a file
+- palindromechecker/tests/test_main.py:
+    - description: Ensure that the test_main.py file exists in the palindromechecker/tests/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for test_main.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Ensure that there are the right number of test cases defined in the test_main.py file
+      check: MatchFileFragment
+      options:
+        fragment: "test_"
+        count: 4
+        exact: false
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in test_main.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 5
+        exact: false
+    - description: Create a sufficient number of single-line comments in test_main.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 5
+        exact: false
+
+# perform checks on a file
+- palindromechecker/palindromechecker/palindrome.py:
+    - description: Ensure that the palindrome.py file exists in the palindromechecker/palindromechecker/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for palindrome.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in palindrome.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 5
+        exact: false
+    - description: Create a sufficient number of single-line comments in palindrome.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 2
+        exact: false
+
+# perform checks on a file
+- palindromechecker/tests/test_palindrome.py:
+    - description: Ensure that the test_palindrome.py file exists in the palindromechecker/tests/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for test_palindrome.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Ensure that there are the right number of test cases defined in the test_palindrome.py file
+      check: MatchFileFragment
+      options:
+        fragment: "test_"
+        count: 4
+        exact: false
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in palindrome.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 5
+        exact: false
+    - description: Create a sufficient number of single-line comments in test_palindrome.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 4
+        exact: false
+
+# perform checks on a file
+- palindromechecker/palindromechecker/util.py:
+    - description: Ensure that the util.py file exists in the palindromechecker/palindromechecker/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for util.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in util.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 2
+        exact: false
+    - description: Create a sufficient number of single-line comments in util.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 2
+        exact: false
+
+# perform checks on a file
+- palindromechecker/tests/test_util.py:
+    - description: Ensure that the test_util.py file exists in the palindromechecker/tests/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for test_util.py
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Ensure that there are the right number of test cases defined in the test_util.py file
+      check: MatchFileFragment
+      options:
+        fragment: "test_"
+        count: 2
+        exact: false
+    - description: Create a sufficient number of docstring (i.e., multiple-line) comments in test_util.py
+      check: CountMultipleLineComments
+      options:
+        language: "Python"
+        count: 3
+        exact: false
+    - description: Create a sufficient number of single-line comments in test_util.py
+      check: CountSingleLineComments
+      options:
+        language: "Python"
+        count: 2
+        exact: false
+
+# run a command
+- description: Pass the linting and formatting checks run by ruff
+  command: cd palindromechecker && poetry run task ruff
+
+# run a command
+- description: Pass the type checks run by mypy
+  command: cd palindromechecker && poetry run task mypy
+
+# run a command
+- description: Pass the linting checks run by pymarkdown
+  command: cd palindromechecker && poetry run task markdownlint
+
+# run a command
+- description: Pass all of the Pytest test cases
+  command: cd palindromechecker && poetry run task test
+
+# perform checks on a file
+- writing/reflection.md:
+    - description: Ensure that the reflection.md file exists in the writing/ directory
+      check: ConfirmFileExists
+    - description: Complete all TODOs, remove the TODO markers, and rewrite comments for the reflection
+      check: MatchFileFragment
+      options:
+        fragment: TODO
+        count: 0
+        exact: true
+    - description: Delete the 'Add Your Name Here' prompt in the reflection file
+      check: MatchFileFragment
+      options:
+        fragment: "Add Your Name Here"
+        count: 0
+        exact: true
+    - description: Confirm that the markdown file has the correct number of headers
+      check: CountMarkdownTags
+      options:
+        tag: heading
+        count: 6
+        exact: false
+    - description: Confirm that the markdown file has the correct number of fenced code blocks
+      check: CountMarkdownTags
+      options:
+        tag: code_block
+        count: 8
+        exact: true
+    - description: Write a minimum number of meaningful words in the reflection
+      check: CountFileWords
+      options:
+        count: 200
+        exact: false
+
+# count number of commits in the GitHub repository
+- description: Have at least a specific minimum of commits in repository
+  check: CountCommits
+  options:
+    count: 10
